@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-{% seo %}
+{% seo %}   
+    
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script src="{{ '/assets/js/respond.js' | relative_url }}"></script>
@@ -15,10 +16,19 @@
     <link rel="stylesheet" href="{{ '/assets/css/ie.css' | relative_url }}">
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+		<style>
+			html, body { 
+				/* min-height: 100%; */
+				background-color: black;
+				color: white;
+			}
+		</style>
   </head>
   <body>
-      <div id="header">
+    <!--  
+    <div id="header">       
         <nav>
           <li class="fork"><a href="{{ site.github.repository_url }}">View On GitHub</a></li>
           {% if site.show_downloads %}
@@ -27,17 +37,27 @@
             <li class="title">DOWNLOADS</li>
           {% endif %}
         </nav>
-      </div><!-- end header -->
+      </div>
+    --> <!-- end header -->    
+    
 
     <div class="wrapper">
+      
+       
 
       <section>
         <div id="title">
+          
+          <div class="w3-container w3-black" style="text-align: center; ">
+            <img height="10%" width="10%" style="margin: 5px;" src="https://www.fitnesstitanium.bg/wp-content/uploads/2019/09/logo-light-new.png" alt="Light Logo"/>
+          </div>
+          <!--
           <h1>{{ site.title | default: site.github.repository_name }}</h1>
           <p>{{ site.description | default: site.github.project_tagline }}</p>
           <hr>
           <span class="credits left">Project maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></span>
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/mattgraham">mattgraham</a></span>
+          -->
         </div>
 
         {{ content }}
