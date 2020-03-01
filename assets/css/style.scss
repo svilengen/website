@@ -3,12 +3,19 @@
 
 @import "{{ site.theme }}";
 
-html, body { 				
-				background-color: black;
-				color: white;
-			}
+html {
+	background-color: black;
+	color: white;
+	height: 100%;
+}
+
+body {
+	background-color: black;
+	color: white;
+	min-height: 100%;
+}
 
 .imageClass {
-				max-width: 15%; 
-				height: auto; 
-			}
+	max-width: 15%; 
+	height: auto; 
+}
