@@ -6,8 +6,6 @@ title: Fitness Titanium Coaches Schedule
 <div id="csv-display" class="row"></div>
 
 <script>		
-
-
 function groupBy(list, keyGetter) {
     const map = new Map();
     list.forEach((item) => {
@@ -21,12 +19,17 @@ function groupBy(list, keyGetter) {
     });
     return map;
 }
-	function generateHtmlTable(data) {
+function generateHtmlTable(data) {
 	var headers = data[0];	
 	var weekdayIdx = headers.indexOf("Weekday");
 	var timeIdx = headers.indexOf("Time");
 	var sportIdx = headers.indexOf("Sport");
 	var nameIdx = headers.indexOf("Name");
+	var videoIdx = headers.indexOf("Video");
+	var colorIdx = headers.indexOf("Color");
+	var pictureIdx = headers.indexOf("Picture");
+	var descriptionIdx = headers.indexOf("Description");
+	
 	
 	var groupedByWeekday = groupBy(data, row => row[weekdayIdx]);
 	
@@ -46,12 +49,20 @@ function groupBy(list, keyGetter) {
 				
 				var arr = groupedByWeekday.get(dayOfWeek);
 				
-				$.each(arr, function(index, scheduleEntry) {
-					html += '<div class="card">';					
+				$.each(arr, function(index, scheduleEntry) {					
+					var color = scheduleEntry[colorIdx];
+					var sport = scheduleEntry[sportIdx];
+					var name = scheduleEntry[nameIdx];
+					var encodedDescription = encodeURIComponent(scheduleEntry[descriptionIdx]);
+					var video = scheduleEntry[videoIdx];
+					var picture = scheduleEntry[pictureIdx];
+					html += '<a href="details.html?Video=' + video + '&Picture=' + picture + '&Description=' + encodedDescription + '">';
+					html += '<div class="card">';		
 					html += '<h3>' + scheduleEntry[timeIdx] + '</h3>';										
-					html += '<p>' + scheduleEntry[sportIdx] + '</p>';										
-					html += '<p>' + scheduleEntry[nameIdx] + '</p>';					
+					html += '<p style="color:' + color + '">' + sport + '</p>';										
+					html += '<p>' + name + '</p>';													
 					html += '</div>';							
+					html += '</a>';					
 				});
 				
 				html += '</div>';
@@ -63,6 +74,8 @@ function groupBy(list, keyGetter) {
 		
 	var theUrl = "https://cors-anywhere.herokuapp.com/https://docs.google.com/spreadsheets/d/e/2PACX-1vTvj1LwXWUyp9u_DJuw6qEpE_hHHC-YEai-D__LyAhjD7snpn8-y1DbywxlzSjykPrDThfeHRHmebrs/pub?gid=827461568&single=true&output=csv";
 		
+
+		
 	$.ajax({
 	  type: "GET",  
 	  url: theUrl,
@@ -71,7 +84,9 @@ function groupBy(list, keyGetter) {
 	  {
 		data = $.csv.toArrays(response);
 		console.log(data);
-		generateHtmlTable(data);
+		generateHtmlTable(data);		
+		
+	
 	  }   
 	});		
 </script>
