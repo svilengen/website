@@ -3,95 +3,90 @@ layout: default
 title: Fitness Titanium Coaches Schedule
 published: true
 ---
-	
+
 <div id="csv-display" class="row"></div>
 
-<script>		
-function groupBy(list, keyGetter) {
-    const map = new Map();
-    list.forEach((item) => {
-         const key = keyGetter(item);
-         const collection = map.get(key);
-         if (!collection) {
-             map.set(key, [item]);
-         } else {
-             collection.push(item);
-         }
-    });
-    return map;
-}
-function generateHtmlTable(data) {
-	var headers = data[0];	
-	var weekdayIdx = headers.indexOf("Weekday");
-	var timeIdx = headers.indexOf("Time");
-	var sportIdx = headers.indexOf("Sport");
-	var nameIdx = headers.indexOf("Name");
-	var videoIdx = headers.indexOf("Video");
-	var colorIdx = headers.indexOf("Color");
-	var pictureIdx = headers.indexOf("Picture");
-	var descriptionIdx = headers.indexOf("Description");
-	
-	
-	var groupedByWeekday = groupBy(data, row => row[weekdayIdx]);
-	
-	console.log(groupedByWeekday);
-	
-		
-	
-	
-	daysInWeek = ['Понеделник', 'Вторник', 'Сряда', 'Четвъртък', 'Петък', 'Събота', 'Неделя'];
-	var html = '';	
-			
-			$.each(daysInWeek, function( index, dayOfWeek ) {		
-				html += '<div class="column">';
-				html +=	'<h5 style="text-align:center;background-color: transparent;">';					html += dayOfWeek;
-				html +=	'</h5>';				
-				
-				var arr = groupedByWeekday.get(dayOfWeek);
-				
-				$.each(arr, function(index, scheduleEntry) {
-                  var time = scheduleEntry[timeIdx];
-					var color = scheduleEntry[colorIdx];
-					var sport = scheduleEntry[sportIdx];
-					var name = scheduleEntry[nameIdx];
-					var encodedDescription = encodeURIComponent(scheduleEntry[descriptionIdx]);
-					var video = scheduleEntry[videoIdx];
-					var picture = scheduleEntry[pictureIdx];
-					html += '<a href="details.html?Video=' + video + '&Picture=' + picture + '&Description=' + encodedDescription + '">';				                                    	
-					var cardClass = 'card';
-					if (index%2==0) {
-						cardClass = 'card-light';
-					}					
-					html += '<div class="' + cardClass + ' button">';				
-                  	html += '<h3 style="color:white">' + time + '</h3>';
-					html += '<p style="font-weight: bold;color:' + color + '">' + sport + '</p>';							
-                  html += '<p style="font-style: italic;color:' + color + '">' + name + '</p>';									
-					html += '</div>';							
-					html += '</a>';					
-				});
-				
-				html += '</div>';
-			});						
-	  $('#csv-display').append(html);
-	}	
-		
-		
-		
-	var theUrl = "https://cors-anywhere.herokuapp.com/https://docs.google.com/spreadsheets/d/e/2PACX-1vTvj1LwXWUyp9u_DJuw6qEpE_hHHC-YEai-D__LyAhjD7snpn8-y1DbywxlzSjykPrDThfeHRHmebrs/pub?gid=827461568&single=true&output=csv";
-		
+<script>
+	function groupBy(list, keyGetter) {
+		const map = new Map();
+		list.forEach((item) => {
+			const key = keyGetter(item);
+			const collection = map.get(key);
+			if (!collection) {
+				map.set(key, [item]);
+			} else {
+				collection.push(item);
+			}
+		});
+		return map;
+	}
+	function generateHtmlTable(data) {
+		var headers = data[0];
+		var weekdayIdx = headers.indexOf("Weekday");
+		var timeIdx = headers.indexOf("Time");
+		var sportIdx = headers.indexOf("Sport");
+		var nameIdx = headers.indexOf("Name");
+		var videoIdx = headers.indexOf("Video");
+		var colorIdx = headers.indexOf("Color");
+		var pictureIdx = headers.indexOf("Picture");
+		var descriptionIdx = headers.indexOf("Description");
 
-		
+
+		var groupedByWeekday = groupBy(data, row => row[weekdayIdx]);
+
+		console.log(groupedByWeekday);
+
+
+
+
+		daysInWeek = ['Понеделник', 'Вторник', 'Сряда', 'Четвъртък', 'Петък', 'Събота', 'Неделя'];
+		var html = '';
+
+		$.each(daysInWeek, function (index, dayOfWeek) {
+			html += '<div class="column">';
+			html += '<h5 style="text-align:center;background-color: transparent;">'; html += dayOfWeek;
+			html += '</h5>';
+
+			var arr = groupedByWeekday.get(dayOfWeek);
+
+			$.each(arr, function (index, scheduleEntry) {
+				var time = scheduleEntry[timeIdx];
+				var color = scheduleEntry[colorIdx];
+				var sport = scheduleEntry[sportIdx];
+				var name = scheduleEntry[nameIdx];
+				var encodedDescription = encodeURIComponent(scheduleEntry[descriptionIdx]);
+				var video = scheduleEntry[videoIdx];
+				var picture = scheduleEntry[pictureIdx];
+				html += '<a href="details.html?Video=' + video + '&Picture=' + picture + '&Description=' + encodedDescription + '">';
+				var cardClass = 'card';
+				if (index % 2 == 0) {
+					cardClass = 'card-light';
+				}
+				html += '<div class="' + cardClass + ' button">';
+				html += '<h3 style="color:white">' + time + '</h3>';
+				html += '<p style="font-weight: bold;color:' + color + '">' + sport + '</p>';
+				html += '<p style="font-style: italic;color:' + color + '">' + name + '</p>';
+				html += '</div>';
+				html += '</a>';
+			});
+
+			html += '</div>';
+		});
+		$('#csv-display').append(html);
+	}
+
+	var theUrl = "https://cors-anywhere.herokuapp.com/https://docs.google.com/spreadsheets/d/e/2PACX-1vTvj1LwXWUyp9u_DJuw6qEpE_hHHC-YEai-D__LyAhjD7snpn8-y1DbywxlzSjykPrDThfeHRHmebrs/pub?gid=827461568&single=true&output=csv";
+
 	$.ajax({
-	  type: "GET",  
-	  url: theUrl,
-	  dataType: "text",       
-	  success: function(response)  
-	  {
-		data = $.csv.toArrays(response);
-		console.log(data);
-		generateHtmlTable(data);		
-		
-	
-	  }   
+		type: "GET",
+		url: theUrl,
+		dataType: "text",
+		success: function (response) {
+			data = $.csv.toArrays(response);
+			console.log(data);
+			generateHtmlTable(data);
+
+
+		}
 	});		
 </script>
