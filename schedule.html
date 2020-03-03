@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Fitness Titanium Coaches Schedule
+published: true
 ---
 	
 <div id="csv-display" class="row"></div>
@@ -56,9 +57,16 @@ function generateHtmlTable(data) {
 					var encodedDescription = encodeURIComponent(scheduleEntry[descriptionIdx]);
 					var video = scheduleEntry[videoIdx];
 					var picture = scheduleEntry[pictureIdx];
-					html += '<a href="details.html?Video=' + video + '&Picture=' + picture + '&Description=' + encodedDescription + '">';
-					html += '<div class="card">';		
-					html += '<h3>' + scheduleEntry[timeIdx] + '</h3>';										
+					html += '<a href="details.html?Video=' + video + '&Picture=' + picture + '&Description=' + encodedDescription + '">';				
+                  
+                  	
+					var cardClass = 'card';
+					if (index%2==0) {
+						cardClass = 'card-light';
+					}					
+					html += '<div class="' + cardClass + ' button">';
+				
+                  	html += '<h3>' + scheduleEntry[timeIdx] + '</h3>';
 					html += '<p style="color:' + color + '">' + sport + '</p>';										
 					html += '<p>' + name + '</p>';													
 					html += '</div>';							
@@ -90,4 +98,3 @@ function generateHtmlTable(data) {
 	  }   
 	});		
 </script>
-
