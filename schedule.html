@@ -62,9 +62,9 @@ function generateHtmlTable(data) {
 						cardClass = 'card-light';
 					}					
 					html += '<div class="' + cardClass + ' button">';				
-                  	html += '<h3 style="color:red">' + scheduleEntry[timeIdx] + '</h3>';
+                  	html += '<h3 style="color:white">' + scheduleEntry[timeIdx] + '</h3>';
 					html += '<p style="font-weight: bold;color:' + color + '">' + sport + '</p>';							
-                  html += '<p>' + name + '</p>';									
+                  html += '<p style="font-style: italic;color:' + color + '">' + name + '</p>';									
 					html += '</div>';							
 					html += '</a>';					
 				});
