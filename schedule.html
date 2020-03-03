@@ -43,10 +43,9 @@ function generateHtmlTable(data) {
 	var html = '';	
 			
 			$.each(daysInWeek, function( index, dayOfWeek ) {		
-				html += '<div class="column">';							
-				html +=	'<h5>';			
-				html += dayOfWeek;
-				html +=	'</h5>';
+				html += '<div class="column">';
+				html +=	'<h5 style="text-align:center;background-color: red;">';					html += dayOfWeek;
+				html +=	'</h5>';				
 				
 				var arr = groupedByWeekday.get(dayOfWeek);
 				
@@ -57,18 +56,15 @@ function generateHtmlTable(data) {
 					var encodedDescription = encodeURIComponent(scheduleEntry[descriptionIdx]);
 					var video = scheduleEntry[videoIdx];
 					var picture = scheduleEntry[pictureIdx];
-					html += '<a href="details.html?Video=' + video + '&Picture=' + picture + '&Description=' + encodedDescription + '">';				
-                  
-                  	
+					html += '<a href="details.html?Video=' + video + '&Picture=' + picture + '&Description=' + encodedDescription + '">';				                                    	
 					var cardClass = 'card';
 					if (index%2==0) {
 						cardClass = 'card-light';
 					}					
-					html += '<div class="' + cardClass + ' button">';
-				
-                  	html += '<h3>' + scheduleEntry[timeIdx] + '</h3>';
-					html += '<p style="color:' + color + '">' + sport + '</p>';										
-					html += '<p>' + name + '</p>';													
+					html += '<div class="' + cardClass + ' button">';				
+                  	html += '<h3 style="color:red">' + scheduleEntry[timeIdx] + '</h3>';
+					html += '<p style="font-weight: bold;color:' + color + '">' + sport + '</p>';							
+                  html += '<p>' + name + '</p>';									
 					html += '</div>';							
 					html += '</a>';					
 				});
