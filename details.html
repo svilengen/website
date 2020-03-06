@@ -32,19 +32,17 @@ function getUrlVars()
     return vars;
 }
 
-$(document).ready(function(){   
-        var video = getUrlVars()["Video"];
-		console.log(video);
+	$(document).ready(function() {   
+        	var video = getUrlVars()["Video"];
+		
 		$("#Video").attr("src", video + '?controls=0&amp;start=1');
 		
 		var picture = getUrlVars()["Picture"];
-		$("#Picture").attr("src", picture);
-		console.log(picture);
+		$("#Picture").attr("src", picture);		
 		
 		var description = getUrlVars()["Description"];		
-		$("#Description").text(decodeURIComponent(description));
-		console.log(description);        
+		$("#Description").text(decodeURIComponent(description));		
     
-});
+	});
 
 </script>
