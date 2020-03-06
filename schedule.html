@@ -3,77 +3,95 @@ layout: default
 title: Fitness Titanium Coaches Schedule
 ---
 
-<div id="content" class="row"></div>
-		
-<script src="https://script.google.com/macros/s/AKfycbx1KkxeGTRLjobSQb202PM1ecSjD738ixJGMOWhMZD-JUX6-lM8/exec"></script>
-
-		
-<script>
-        var html = '';
-        $.each(data, function(index, scheduleEntry) {
-            var dayOfWeek = scheduleEntry[0];
-            html += '<div class="column">';
-            html += '<h5 style="text-align:center;background-color: transparent;">';
-            html += dayOfWeek;
-            html += '</h5>';
-            $.each(scheduleEntry[1], function(index, entry) {
-                var time = entry.Time;
-                var color = entry.Color;
-                var sport = entry.Sport;
-                var name = entry.Name;
-                var encodedDescription = encodeURIComponent(entry.Description);
-                var video = entry.Video;
-                var picture = entry.Picture;
-
-
-                var cardClass = 'card';
-                if (index % 2 == 0) {
-                    cardClass = 'card-light';
-                }
-                html += '<div class="' + cardClass + ' button" name="' + sport.replace(/\s+/g, '') + '">';
-                html += '<h3 style="color:white">' + time + '</h3>';
-                html += '<p>' + sport + '</p>';
-                html += '<a href="details.html?Video=' + video + '&Picture=' + picture + '&Description=' + encodedDescription + '">';
-                html += '<p style="font-style: italic;">' + name + '</p>';
-                html += '</a>';
-                html += '</div>';
-
-            });
-            html += '</div>';
-        });
-
-        $('#content').append(html);
-	$('a').click(function(event) {
-            event.stopPropagation();
-        });
-    </script>
+<div id="loading" class="w3-container w3-black" style="text-align: center; display: none;"><img src="https://media.giphy.com/media/Bs7SyQuQsW97W/giphy.gif"></div>
+    <div id="content" class="row"></div>
 
     <script>
-        // Get the container element
-        var btnContainer = document.getElementById("content");
+        $(document).ajaxStart(function() {
+            $("#loading").show();
+        });
 
-        // Get all buttons with class="btn" inside the container
-        var btns = btnContainer.getElementsByClassName("button");
+        $(document).ajaxStop(function() {
+            $("#loading").hide();
+        });
 
-        // Loop through the buttons and add the active class to the current/clicked button
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].addEventListener("click", function(e) {
-                var shouldDeactivateAll = e.currentTarget.classList.contains("active");
+        var theUrl = "https://script.google.com/macros/s/AKfycbx1KkxeGTRLjobSQb202PM1ecSjD738ixJGMOWhMZD-JUX6-lM8/exec";
 
-                // cleanup first
+        $.ajax({
+            type: "GET",
+            url: theUrl,
+            dataType: "text",
+            success: function(response) {
+                eval(response);
+                var html = '';
+                $.each(data, function(index, scheduleEntry) {
+                    var dayOfWeek = scheduleEntry[0];
+                    html += '<div class="column">';
+                    html += '<h5 style="text-align:center;background-color: transparent;">';
+                    html += dayOfWeek;
+                    html += '</h5>';
+                    $.each(scheduleEntry[1], function(index, entry) {
+                        var time = entry.Time;
+                        var color = entry.Color;
+                        var sport = entry.Sport;
+                        var name = entry.Name;
+                        var encodedDescription = encodeURIComponent(entry.Description);
+                        var video = entry.Video;
+                        var picture = entry.Picture;
+
+
+                        var cardClass = 'card';
+                        if (index % 2 == 0) {
+                            cardClass = 'card-light';
+                        }
+                        html += '<div class="' + cardClass + ' button" name="' + sport.replace(/\s+/g, '') + '">';
+                        html += '<h3 style="color:white">' + time + '</h3>';
+                        html += '<p>' + sport + '</p>';
+                        html += '<a style="font-style: italic;" href="details.html?Video=' + video + '&Picture=' + picture + '&Description=' + encodedDescription + '">';
+                        html += name;
+                        html += '</a>';
+                        html += '</div>';
+
+                    });
+                    html += '</div>';
+                });
+
+                $('#content').append(html);
+                $('a').click(function(event) {
+                    event.stopPropagation();
+                });
+
+                // Get the container element
+                var btnContainer = document.getElementById("content");
+
+                // Get all buttons with class="btn" inside the container
                 var btns = btnContainer.getElementsByClassName("button");
+
+                // Loop through the buttons and add the active class to the current/clicked button
                 for (var i = 0; i < btns.length; i++) {
-                    btns[i].classList.remove("active");
+                    btns[i].addEventListener("click", function(e) {
+
+
+                        var shouldDeactivateAll = e.currentTarget.classList.contains("active");
+
+                        // cleanup first
+                        var btns = btnContainer.getElementsByClassName("button");
+                        for (var i = 0; i < btns.length; i++) {
+                            btns[i].classList.remove("active");
+                        }
+
+                        if (!shouldDeactivateAll) {
+                            // add the new style
+                            var x = document.getElementsByName(this.getAttribute("name"));
+                            for (var j = 0; j < x.length; j++) {
+                                x[j].classList.add("active");
+                            }
+                        }
+
+                    });
                 }
 
-                if (!shouldDeactivateAll) {
-                    // add the new style
-                    var x = document.getElementsByName(this.getAttribute("name"));
-                    for (var j = 0; j < x.length; j++) {
-                        x[j].classList.add("active");
-                    }
-                }
 
-            });
-        }
+            }
+        });
     </script>
