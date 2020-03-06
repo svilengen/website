@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Fitness Titanium Coaches Schedule
-published: true
 ---
 
 <div id="content" class="row"></div>
@@ -9,35 +8,36 @@ published: true
 <script src="https://script.googleusercontent.com/macros/echo?user_content_key=HslCUYnJQyws242spBlVuYuBE1yQqIxAR8Q7Biq3JObTkXhVzWejmvJtiQYLBJ1MYl8zmW9qw_Mi90zcGs0t6d1v2xT_VO2Am5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnCsqV7Or82ZoW0xQ1REzbuu6acMkRUdUoZHHwS9H1pOEPaXHh60nlMupfCbARHA0mg&lib=MoO6JDcZUu1u_Lwz88ToMQn3m5LrxoPok"></script>
 
 		
-		<script>
-		var html = '';
-		$.each(data, function (index, scheduleEntry) {
-			var dayOfWeek = scheduleEntry[0];
-			html += '<div class="column">';
-			html += '<h5 style="text-align:center;background-color: transparent;">'; html += dayOfWeek;
-			html += '</h5>';			
-			$.each(scheduleEntry[1], function (index, entry) {
-				var time = entry.Time;
-				var color = entry.Color;
-				var sport = entry.Sport;
-				var name = entry.Name;
-				var encodedDescription = encodeURIComponent(entry.Description);
-				var video = entry.Video;
-				var picture = entry.Picture;
-				
-				html += '<a href="details.html?Video=' + video + '&Picture=' + picture + '&Description=' + encodedDescription + '">';
-				var cardClass = 'card';
-				if (index % 2 == 0) {
-					cardClass = 'card-light';
-				}
-				html += '<div class="' + cardClass + ' button">';
-				html += '<h3 style="color:white">' + time + '</h3>';
-				html += '<p style="font-weight: bold;color:' + color + '">' + sport + '</p>';
-				html += '<p style="font-style: italic;color:' + color + '">' + name + '</p>';
-				html += '</div>';
-				html += '</a>';
-			});
-			html += '</div>';			
+<script>
+	var html = '';
+	$.each(data, function (index, scheduleEntry) {
+		var dayOfWeek = scheduleEntry[0];
+		html += '<div class="column">';
+		html += '<h5 style="text-align:center;background-color: transparent;">'; html += dayOfWeek;
+		html += '</h5>';			
+		$.each(scheduleEntry[1], function (index, entry) {
+			var time = entry.Time;
+			var color = entry.Color;
+			var sport = entry.Sport;
+			var name = entry.Name;
+			var encodedDescription = encodeURIComponent(entry.Description);
+			var video = entry.Video;
+			var picture = entry.Picture;
+
+			html += '<a href="details.html?Video=' + video + '&Picture=' + picture + '&Description=' + encodedDescription + '">';
+			var cardClass = 'card';
+			if (index % 2 == 0) {
+				cardClass = 'card-light';
+			}
+			html += '<div class="' + cardClass + ' button">';
+			html += '<h3 style="color:white">' + time + '</h3>';
+			html += '<p style="font-weight: bold;color:' + color + '">' + sport + '</p>';
+			html += '<p style="font-style: italic;color:' + color + '">' + name + '</p>';
+			html += '</div>';
+			html += '</a>';
 		});
-		$('#content').append(html);
-		</script>
+		html += '</div>';			
+	});
+	
+	$('#content').append(html);
+</script>
