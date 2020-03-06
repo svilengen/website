@@ -43,6 +43,9 @@ title: Fitness Titanium Coaches Schedule
         });
 
         $('#content').append(html);
+	$('a').click(function(event) {
+            event.stopPropagation();
+        });
     </script>
 
     <script>
