@@ -9,9 +9,9 @@
 
 /* Style the active class */
 
-.active {
-    background-color: #74992e !important;
-    transform: translateY(4px);
+.active {    
+    transform: translateY(4px);    
+    box-shadow: 0px 0px 10px 8px rgba(255, 255, 255, 1) !important;
 }
 
 .button:hover {
