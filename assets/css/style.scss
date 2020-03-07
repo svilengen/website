@@ -6,6 +6,20 @@
     box-sizing: border-box;
 }
 
+.logo {
+    animation-name: example;
+    animation-duration: 3s;
+}
+
+@keyframes example {
+    from {
+        filter: blur(10px);
+    }
+    to {
+        filter: blur(0px);
+    }
+}
+
 
 /* Style the active class */
 
