@@ -193,21 +193,23 @@ title: Fitness Titanium Coaches Schedule
 
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
-            $("#Video").attr("src", '');
-            $("#Picture").attr("src", '');
-            $("#Description").text('');
-            $("#Name h2").html('');
+            cleanupModal();
             modal.style.display = "none";
         }
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == modal) {
+                cleanupModal();
+                modal.style.display = "none";
+            }
+        }
+        
+        function cleanupModal() {
                 $("#Video").attr("src", '');
                 $("#Picture").attr("src", '');
                 $("#Description").text('');
                 $("#Name h2").html('');
-                modal.style.display = "none";
-            }
-        }
+        }            
+            
     </script>
