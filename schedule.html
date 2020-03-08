@@ -54,8 +54,8 @@ src="https://media.giphy.com/media/Bs7SyQuQsW97W/giphy.gif">
                             cardClass = 'card-light';
                         }
                         html += '<div class="' + cardClass + ' button" name="' + sport.replace(/\s+/g, '') + '">';
-                        html += '<h3 style="color:white">' + time + '</h3>';
-                        html += '<p>' + sport + '</p>';
+                        html += '<div><b>' + time + '</b></div>';
+                        html += '<div>' + sport + '</div>';
                         html += '<a style="font-style: italic;" href="details.html?Video=' + video + '&Picture=' + picture + '&Description=' + encodedDescription + '">';
                         html += name;
                         html += '</a>';
