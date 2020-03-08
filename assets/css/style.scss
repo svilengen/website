@@ -81,6 +81,7 @@ A {
     padding: 10px;
     text-align: center;
     margin-bottom: 10px;
+    box-shadow: 0px 0px 5px 2px rgba(255, 255, 255, 0.4);
 }
 
 .card-light {
@@ -89,6 +90,7 @@ A {
     text-align: center;
     margin-bottom: 10px;
     background-color: #616161;
+    box-shadow: 0px 0px 5px 2px rgba(255, 255, 255, 0.4);
 }
 
 @media screen and (max-width: 600px) {
