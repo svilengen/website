@@ -1,7 +1,7 @@
 ---
 ---
 
-
+/* generic html components styling */
 * {
     box-sizing: border-box;
 }
@@ -17,6 +17,15 @@ body {
     background-color: black;
     color: white;
     min-height: 100%;
+}
+
+A {
+    text-decoration: none;
+}
+
+.imageClass {
+    max-width: 35%;
+    height: auto;
 }
 
 /* style and animte the header logo */
@@ -53,10 +62,6 @@ body {
     to {
         transform: translateY(4px);
     }
-}
-
-A {
-    text-decoration: none;
 }
 
 /* style the deck of cards */
