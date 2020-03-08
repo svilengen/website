@@ -16,16 +16,59 @@ title: Fitness Titanium Coaches Schedule
     <!-- Modal content -->
     <div class="modal-content">
         <span class="close">&times;</span>
-        <div style=" text-align-last: center; ">
-            <div class="imgDiv" style="text-align:center;">
-                <img class="imageClass" id="Picture" src=""></img>
+
+        <!-- Page Container -->
+        <div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+            <!-- The Grid -->
+            <div class="w3-row-padding">
+
+                <!-- Left Column -->
+                <div class="w3-third">
+
+                    <div class="w3-card-4">
+                        <div class="w3-display-container">
+                            <img id="Picture" src="https://picsum.photos/640/480" style="width:100%" alt="Avatar">
+                            <div id="Name" class="w3-display-bottomleft w3-container" style="text-shadow:                              -1px -1px 0 #000,
+                            1px -1px 0 #000,
+                            -1px 1px 0 #000,
+                            1px 1px 0 #000;">
+                                <h2></h2>
+                            </div>
+                        </div>
+                        <div class="w3-container">
+                            <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Designer</p>
+                            <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>London, UK</p>
+                            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>ex@mail.com</p>
+                            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>1224435534</p>
+                            <br>
+                        </div>
+                    </div><br>
+
+                    <!-- End Left Column -->
+                </div>
+
+                <!-- Right Column -->
+                <div class="w3-twothird">
+
+                    <div class="w3-container w3-card  w3-margin-bottom">
+                        <h2 class=" w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Description</h2>
+                        <div id="Description" class="w3-container"> </div>
+                    </div>
+                    <div class="w3-container w3-card ">
+                        <h2 class=" w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Video</h2>
+                        <div class="w3-container">
+                            <iframe id="Video" width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <!-- End Right Column -->
+                </div>
+
+                <!-- End Grid -->
             </div>
 
-
-            <div id="Description" class="main">
-            </div>
-
-            <iframe id="Video" width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <!-- End Page Container -->
         </div>
 
     </div>
@@ -63,6 +106,7 @@ title: Fitness Titanium Coaches Schedule
                         var color = entry.Color;
                         var sport = entry.Sport;
                         var name = entry.Name;
+                        var encodedName = encodeURIComponent(name);
                         var encodedDescription = encodeURIComponent(entry.Description);
                         var video = entry.Video;
                         var picture = entry.Picture;
@@ -75,7 +119,7 @@ title: Fitness Titanium Coaches Schedule
                         html += '<div class="' + cardClass + ' button" name="' + sport.replace(/\s+/g, '') + '">';
                         html += '<div><b>' + time + '</b></div>';
                         html += '<div>' + sport + '</div>';
-                        html += '<div onclick="openModal(event' + ',\'' + video + '\',\'' + picture + '\',\'' + encodedDescription +
+                        html += '<div onclick="openModal(event' + ',\'' + video + '\',\'' + picture + '\',\'' + encodedDescription + '\',\'' + encodedName +
                             '\');">';
                         html += name;
                         html += '</div>';
@@ -125,12 +169,13 @@ title: Fitness Titanium Coaches Schedule
         });
         
             
-        function openModal(e, video, picture, description) {
+        function openModal(e, video, picture, description, name) {
             e.stopPropagation();
 
             $("#Video").attr("src", video + '?controls=0&amp;start=1');
             $("#Picture").attr("src", picture);
             $("#Description").text(decodeURIComponent(description));
+            $("#Name h2").html(decodeURIComponent(name));
 
             // Get the modal
             var modal = document.getElementById("myModal");
@@ -151,6 +196,7 @@ title: Fitness Titanium Coaches Schedule
             $("#Video").attr("src", '');
             $("#Picture").attr("src", '');
             $("#Description").text('');
+            $("#Name h2").html('');
             modal.style.display = "none";
         }
 
@@ -160,6 +206,7 @@ title: Fitness Titanium Coaches Schedule
                 $("#Video").attr("src", '');
                 $("#Picture").attr("src", '');
                 $("#Description").text('');
+                $("#Name h2").html('');
                 modal.style.display = "none";
             }
         }
