@@ -9,6 +9,29 @@ title: Fitness Titanium Coaches Schedule
 </div>
 
 <div id="loader" class="loader" style="display: none;"></div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div style=" text-align-last: center; ">
+            <div class="imgDiv" style="text-align:center;">
+                <img class="imageClass" id="Picture" src=""></img>
+            </div>
+
+
+            <div id="Description" class="main">
+            </div>
+
+            <iframe id="Video" width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+    </div>
+
+</div>
+
 <div id="content" class="row"></div>
 
     <script>
@@ -52,9 +75,10 @@ title: Fitness Titanium Coaches Schedule
                         html += '<div class="' + cardClass + ' button" name="' + sport.replace(/\s+/g, '') + '">';
                         html += '<div><b>' + time + '</b></div>';
                         html += '<div>' + sport + '</div>';
-                        html += '<a style="font-style: italic;" href="details.html?Video=' + video + '&Picture=' + picture + '&Description=' + encodedDescription + '">';
+                        html += '<div onclick="openModal(event' + ',\'' + video + '\',\'' + picture + '\',\'' + encodedDescription +
+                            '\');">';
                         html += name;
-                        html += '</a>';
+                        html += '</div>';
                         html += '</div>';
 
                     });
@@ -99,4 +123,44 @@ title: Fitness Titanium Coaches Schedule
 
             }
         });
+        
+            
+        function openModal(e, video, picture, description) {
+            e.stopPropagation();
+
+            $("#Video").attr("src", video + '?controls=0&amp;start=1');
+            $("#Picture").attr("src", picture);
+            $("#Description").text(decodeURIComponent(description));
+
+            // Get the modal
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+
+        }
+
+
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            $("#Video").attr("src", '');
+            $("#Picture").attr("src", '');
+            $("#Description").text('');
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                $("#Video").attr("src", '');
+                $("#Picture").attr("src", '');
+                $("#Description").text('');
+                modal.style.display = "none";
+            }
+        }
     </script>
